@@ -7,6 +7,8 @@ import GenresTab from "../GenresTab/GenresTab";
 import SortTab from "../SortTab/SortTab";
 import PaginationTab from "../PaginationTab/PaginationTab";
 import {Link} from "react-router-dom";
+import './FsacList.scss';
+import {Helmet} from "react-helmet";
 
 const FsacList = (props) => {
 
@@ -40,6 +42,7 @@ const FsacList = (props) => {
                 });
                 const responses = await axios.all([getData, getGenres]);
                 setData(responses[0].data);
+                console.log(responses[0].data);
                 setPrevPage(responses[0].data.prev);
                 setNextPage(responses[0].data.next);
                 setGenres(responses[1].data);
@@ -48,29 +51,61 @@ const FsacList = (props) => {
             }
             setLoading(false);
         }
-
         fetch();
     }, [props.fsac, BASE_URL, pageFilter, orderingFilter, searchFilter, yearFilter, genreFilter]);
 
+    function createHelmet() {
+        if (props.fsac == 'films') {
+            return `FilmsSAC`;
+        }
+        if (props.fsac == 'series') {
+            return `FSeriesAC`;
+        }
+        if (props.fsac == 'anime') {
+            return `FSAnimeC`;
+        }
+        if (props.fsac == 'cartoons') {
+            return `FSACartoons`;
+        }
+    }
+
     return (
         <>
-            <div className='FilterTab'>
-                <SearchTab setSearchFilter={setSearchFilter} searchFilter={searchFilter}/>
-                <YearsTab yearFilter={yearFilter} setYearFilter={setYearFilter}/>
-                {loading && <Spinner/>}
-                {!loading && (<GenresTab genres={genres} genreFilter={genreFilter} setGenreFilter={setGenreFilter}/>)}
+            <Helmet>
+                <title>{createHelmet()}</title>
+            </Helmet>
+            <div className='filter-container'>
+                <div className={'search-years-container'}>
+                    <SearchTab setSearchFilter={setSearchFilter} searchFilter={searchFilter}/>
+                    <YearsTab yearFilter={yearFilter} setYearFilter={setYearFilter}/>
+                </div>
+                <GenresTab genres={genres} genreFilter={genreFilter} setGenreFilter={setGenreFilter}/>
                 <SortTab orderingFilter={orderingFilter} setOrderingFilter={setOrderingFilter}/>
             </div>
             {loading && <Spinner/>}
             {!loading && (
                 <>
-                    <ul>
+                    <ul className={'movies-list'}>
                         {data.results.map(item =>
                             <li key={item.id}>
-                                <Link to={`/${props.fsac}/${item.id}`}>{item.title}</Link>
-                                <p>{item.year}</p>
-                                <p>{item.desc}</p>
-                                <p>{item.rating}</p>
+                                <Link className={'img-link'} to={`/${props.fsac}/${item.slug}`}>
+                                    <img src={item.poster} alt={item.title}/>
+                                    <label>{item.rating.value}
+                                        <div className={'star'}>★</div>
+                                    </label>
+                                </Link>
+                                <Link className={'title-link'} to={`/${props.fsac}/${item.slug}`}>
+                                    <h1>{item.title}</h1>
+                                    <div>
+                                        <p>{item.year}, </p>
+                                        {item.genre.map((g, i) =>
+                                            <p>
+                                                {g.name}
+                                                {i < item.genre.length - 1 ? ', ' : ''}
+                                            </p>
+                                        )}
+                                    </div>
+                                </Link>
                             </li>
                         )}
                     </ul>

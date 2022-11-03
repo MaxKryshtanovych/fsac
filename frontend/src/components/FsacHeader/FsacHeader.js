@@ -7,10 +7,10 @@ function FsacHeader() {
         <header>
             <nav className={'nav-container'}>
                 <ul>
-                    <li><NavLink exact="true" to="/films">Films</NavLink></li>
-                    <li><NavLink exact="true" to="/series">Series</NavLink></li>
-                    <li><NavLink exact="true" to="/anime">Anime</NavLink></li>
-                    <li><NavLink exact="true" to="/cartoons">Cartoons</NavLink></li>
+                    <li><NavLink exact="true" to="/films" className={({ isActive }) => (isActive ? 'active' : '')}>Films</NavLink></li>
+                    <li><NavLink exact="true" to="/series" className={({ isActive }) => (isActive ? 'active' : '')}>Series</NavLink></li>
+                    <li><NavLink exact="true" to="/anime" className={({ isActive }) => (isActive ? 'active' : '')}>Anime</NavLink></li>
+                    <li><NavLink exact="true" to="/cartoons" className={({ isActive }) => (isActive ? 'active' : '')}>Cartoons</NavLink></li>
                 </ul>
             </nav>
         </header>

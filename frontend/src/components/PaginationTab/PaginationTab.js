@@ -1,4 +1,5 @@
 import React from "react";
+import './PaginationTab.scss'
 
 function decPageNumber(pageFilter, setPageFilter, prevPage) {
     if (prevPage) {
@@ -16,10 +17,18 @@ const PaginationTab = ({pageFilter, setPageFilter, prevPage, nextPage}) => {
 
     return (
         <>
-            {prevPage !== false && (
-                <button id='prevButton' onClick={() => decPageNumber(pageFilter, setPageFilter, prevPage)}>Prev page</button>)}
-            {nextPage !== false && (
-                <button id='nextButton' onClick={() => incPageNumber(pageFilter, setPageFilter, nextPage)}>Next page</button>)}
+            <div className={'pagination-container'}>
+                {prevPage !== false && (
+                    <button id='prevButton' className={'prev-button'}
+                            onClick={() => decPageNumber(pageFilter, setPageFilter, prevPage)}>← Page
+                    </button>
+                )}
+                {nextPage !== false && (
+                    <button id='nextButton' className={'next-button'}
+                            onClick={() => incPageNumber(pageFilter, setPageFilter, nextPage)}>Page →
+                    </button>
+                )}
+            </div>
         </>
     )
 }

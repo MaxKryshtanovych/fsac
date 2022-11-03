@@ -1,18 +1,24 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
+from django.utils.text import slugify
+from django_resized import ResizedImageField
 
 
 class Person(models.Model):
     name = models.CharField(max_length=128, verbose_name="Ім'я")
     surname = models.CharField(max_length=128, verbose_name="Прізвище")
-    avatar = models.ImageField(null=True, blank=True, upload_to="persons/%Y/%m/%d")
+    avatar = ResizedImageField(null=True, blank=True, upload_to="persons/%Y/%m/%d")
+    slug = models.SlugField(unique=True, null=False, blank=True, default='')
 
     class Meta:
         abstract = True
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'{self.name}-{self.surname}')
+        super(Person, self).save(*args, **kwargs)
+
     def __str__(self):
-        fullname = self.name + ' ' + self.surname
-        return fullname
+        return f"{self.name} {self.surname}"
 
 
 class Actor(Person):
@@ -50,52 +56,39 @@ class CartoonGenre(Genre):
 
 
 class Mark(models.Model):
-    MARK_CHOICES = (
-        (0, '0'),
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10'),
-    )
-    value = models.IntegerField(choices=MARK_CHOICES, default=0, verbose_name="Оцінка")
+    value = models.FloatField(null=False, blank=False, default=0, verbose_name="Оцінка")
 
     def __str__(self):
         return f"{self.value}"
 
 
-class Shot(models.Model):
-    image = models.ImageField(null=True, blank=True, upload_to="shots/%Y/%m/%d")
-
-
-class WatchUrl(models.Model):
+class WatchLink(models.Model):
     value = models.URLField(max_length=1024, verbose_name="Посилання")
-    desc = models.CharField(max_length=128, verbose_name="Опис")
+    desc = models.CharField(max_length=128, verbose_name="Озвучка")
 
 
 class Fsac(models.Model):
     title = models.CharField(max_length=128, verbose_name="Назва")
-    poster = models.ImageField(null=True, blank=True, upload_to="posters/%Y/%m/%d")
+    poster = ResizedImageField(null=True, blank=True, upload_to="posters/%Y/%m/%d")
     year = models.PositiveSmallIntegerField(verbose_name="Рік")
     rating = models.ForeignKey(Mark, null=True, on_delete=models.SET_NULL, verbose_name="Рейтинг")
-    shot = models.ManyToManyField(Shot, null=True, blank=True, verbose_name="Кадри")
     desc = models.TextField(max_length=2048, verbose_name="Опис")
-    comment = models.CharField(max_length=256, blank=True, verbose_name="Комент")
     director = models.ManyToManyField(Director, blank=True, verbose_name="Режисер-и")
     actor = models.ManyToManyField(Actor, blank=True, verbose_name="Актор-и")
-    watch_url = models.ManyToManyField(WatchUrl, blank=True, verbose_name="Посилання для перегляду")
+    trailer = models.CharField(max_length=256, null=True, blank=True, verbose_name="Трейлер")
+    watch_url = models.ManyToManyField(WatchLink, blank=True, verbose_name="Посилання для перегляду")
+    slug = models.SlugField(null=False, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'{self.title}-{self.year}')
+        super(Fsac, self).save(*args, **kwargs)
+
     def __str__(self):
-        return self.title
+        return f"{self.title}, {self.year}"
 
 
 class Film(Fsac):

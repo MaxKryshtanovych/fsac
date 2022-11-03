@@ -1,32 +1,24 @@
-.nav-container {
-  padding: 10px 15%;
-  font-size: 1.5rem;
-  background-color: #18181b;
-  border-bottom: 3px solid rebeccapurple;
-
+.sort-container {
   ul {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-    justify-content: center;
-    justify-items: center;
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
-
-    @media (max-width: 667px) {
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 10px;
-      justify-items: center;
-    }
+    display: flex;
   }
 
-  a {
-    position: relative;
-    display: block;
+  h1 {
+    display: inline;
+    margin: 2px;
     padding: 5px;
+    font-size: 1rem;
+    color: #F5F5F5;
+  }
+
+  li {
+    display: inline;
+    cursor: pointer;
+    margin: 2px;
+    padding: 5px;
+    border-width: 3px;
     border-radius: 10px;
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: #F5F5F5;
 
     &:hover {
@@ -44,9 +36,19 @@
       rebeccapurple 1.41734px -1.41108px 5px,
       rebeccapurple 1.92034px -0.558831px 5px;
     }
+
   }
 
   .active {
     background-color: rebeccapurple;
   }
 }
+
+.isee {
+  display: inline-block;
+}
+
+.idontsee {
+  display: none;
+}
+

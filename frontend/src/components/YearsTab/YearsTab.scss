@@ -1,120 +1,113 @@
-form {
-  width: 100%;
-  height: 100%;
-  padding-bottom: 75px;
+.dropdown {
+  width: 200px;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 3px;
+  position: relative;
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+.dropdown-header {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 10px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: radial-gradient(at top, #b5e6cf, #9dddad);
+  padding: 5px;
+  text-align: center;
+  font-size: 1rem;
+  font-family: Consolas;
+  border-width: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rebeccapurple;
+  background-color: #202124;
+  color: #F5F5F5;
+
+  &:hover {
+    box-shadow: rebeccapurple 2px 0px 2px,
+    rebeccapurple 1.75517px 0.958851px 5px,
+    rebeccapurple 1.0806px 1.68294px 5px,
+    rebeccapurple 0.141474px 1.99499px 5px,
+    rebeccapurple -0.832294px 1.81859px 5px,
+    rebeccapurple -1.60229px 1.19694px 5px,
+    rebeccapurple -1.97998px 0.28224px 5px,
+    rebeccapurple -1.87291px -0.701566px 5px,
+    rebeccapurple -1.30729px -1.5136px 5px,
+    rebeccapurple -0.421592px -1.95506px 5px,
+    rebeccapurple 0.567324px -1.91785px 5px,
+    rebeccapurple 1.41734px -1.41108px 5px,
+    rebeccapurple 1.92034px -0.558831px 5px;
+  }
+
+  span {
+    margin-left: 6px;
+  }
+
+  button {
+    margin-left: 6px;
+    padding: 0 4px;
+    font-size: 1rem;
+    font-family: Consolas;
+    cursor: pointer;
+    color: #F5F5F5;
+    border: none;
+    background-color: #202124;
+
+    &:hover {
+      border-radius: 10px;
+      background-color: rebeccapurple;
+    }
+  }
+
 }
 
-.select {
-  width: 225px;
-  height: 40px;
+.dropdown-body {
+  padding: 5px;
+  display: none;
+  height: 190px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: absolute;
+  width: 100%;
+  z-index: 20000;
+  background-color: #202124;
+  border-radius: 10px;
+  border-left: 1px solid rebeccapurple;
+  border-right: 1px solid rebeccapurple;
+  border-bottom: 1px solid rebeccapurple;
+}
+
+.dropdown-body.open {
+  display: block;
+}
+
+.dropdown-item {
+  margin-top: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #202124;
+  color: #F5F5F5;
+  border-bottom: 1px solid rebeccapurple;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: rebeccapurple;
+  }
+}
+
+.selected-year {
   cursor: pointer;
-  background-color: white;
-  box-shadow: 0 2px 0 white;
-  border-radius: 2px;
-
-  &_expand {
-    width: 0;
-    height: 40px;
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    &::after {
-      content: '\003E';
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translate(-50%, -50%) rotate(90deg) scaleY(1.75);
-      color: #3e3e3e;
-      font-size: 28px;
-      pointer-events: none;
-      z-index: 2;
-      transition: all 250ms cubic-bezier(.4,.25,.3,1);
-      opacity: .6;
-    }
-
-    &:hover::after {opacity: 1}
-
-    &:checked::after {transform: translate(-50%, -50%) rotate(90deg) scaleX(-1) scaleY(1.75);}
-  }
-
-  &_expandLabel {
-    display: block;
-    width: 100%;
-    height: 40px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-  }
-
-  &_close {display: none}
-
-  &_closeLabel {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  &_items {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 2px solid #2fb5d1;
-    border-radius: 2px;
-    padding-top: 40px;
-  }
-
-  &_input {display: none}
-
-  &_label {
-    transition: all 250ms cubic-bezier(.4,.25,.3,1);
-    display: block;
-    height: 0;
-    font-size: 1.2rem;
-    line-height: 40px;
-    overflow: hidden;
-    color: #3e3e3e;
-    background-color: #fff;
-    cursor: pointer;
-    padding-left: 20px;
-
-    &-placeholder {
-      height: 40px;
-      vertical-align: middle;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: .6;
-      background-color: transparent;
-    }
-  }
-
-  &_expand:checked {
-    + .select_closeLabel {
-      display: block;
-
-      + .select_options {
-        .select_label {
-          height: 40px;
-          &:hover {background-color: #f7f7f7}
-        }
-
-        + .select_expandLabel {display: none}
-      }
-    }
-  }
-
-  &_input:checked + .select_label {
-    height: 40px;
-    margin-top: -40px;
-  }
+  border-radius: 10px;
+  background-color: rebeccapurple;
 }

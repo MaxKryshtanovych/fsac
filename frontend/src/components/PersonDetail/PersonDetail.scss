@@ -1,0 +1,97 @@
+@import "src/_index.scss";
+
+.person-container {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.fullname-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: block;
+  font-size: 2rem;
+  font-weight: normal;
+  color: $text-color;
+}
+
+.avatar-container {
+  margin: auto;
+  display: block;
+  text-align: center;
+  width: 150px;
+  height: 200px;
+  border-radius: 10px;
+  border: $border;
+  position: relative;
+  margin: auto;
+  cursor: pointer;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+  }
+}
+
+.cin-container {
+  display: inline-block;
+
+  ul {
+    list-style: none;
+  }
+}
+
+.cin-container {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  text-align: center;
+  border-radius: 10px;
+  border: $border;
+  background-color: $background-secondary;
+  position: relative;
+
+  label {
+    top: -16px;
+    left: 30px;
+    padding: 3px;
+    font-size: 1rem;
+    position: absolute;
+    background-color: $background-secondary;
+    border-radius: 10px;
+    border: $border;
+    color: $text-color;
+  }
+
+  a {
+    display: inline-block;
+    padding: 5px;
+    margin: 20px 10px;
+    border-radius: 10px;
+
+    img {
+      border-radius: 10px;
+      vertical-align: middle;
+      width: 150px;
+      height: 200px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-top: 6px;
+      color: $text-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow;
+    }
+  }
+
+  @media screen and (max-width: 667px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

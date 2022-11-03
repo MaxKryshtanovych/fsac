@@ -12,6 +12,7 @@ class ActorViewSet(viewsets.ModelViewSet):
     queryset = Actor.objects.all()
     ordering_fields = ['name']
     ordering = ['name']
+    lookup_field = 'slug'
 
     action_to_serializer = {
         "list": ActorListSerializer,
@@ -31,6 +32,7 @@ class DirectorViewSet(viewsets.ModelViewSet):
     queryset = Director.objects.all()
     ordering_fields = ['name']
     ordering = ['name']
+    lookup_field = 'slug'
 
     action_to_serializer = {
         "list": DirectorListSerializer,
@@ -48,24 +50,32 @@ class FilmGenreViewSet(viewsets.ModelViewSet):
 
     serializer_class = FilmGenreSerializer
     queryset = FilmGenre.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering = ['name']
 
 
 class SeriesGenreViewSet(viewsets.ModelViewSet):
 
     serializer_class = SeriesGenreSerializer
     queryset = SeriesGenre.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering = ['name']
 
 
 class AnimeGenreViewSet(viewsets.ModelViewSet):
 
     serializer_class = AnimeGenreSerializer
     queryset = AnimeGenre.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering = ['name']
 
 
 class CartoonGenreViewSet(viewsets.ModelViewSet):
 
     serializer_class = CartoonGenreSerializer
     queryset = CartoonGenre.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering = ['name']
 
 
 class MarkViewSet(viewsets.ModelViewSet):
@@ -76,14 +86,8 @@ class MarkViewSet(viewsets.ModelViewSet):
 
 class WatchLinkViewSet(viewsets.ModelViewSet):
 
-    serializer_class = WatchUrlSerializer
-    queryset = WatchUrl.objects.all()
-
-
-class ShotViewSet(viewsets.ModelViewSet):
-
-    serializer_class = ShotSerializer
-    queryset = Shot.objects.all()
+    serializer_class = WatchLinkSerializer
+    queryset = WatchLink.objects.all()
 
 
 class FilmViewSet(viewsets.ModelViewSet):
@@ -96,6 +100,7 @@ class FilmViewSet(viewsets.ModelViewSet):
     filterset_fields = ['year', 'genre__name']
     ordering_fields = ['title', 'year', 'rating', 'created']
     ordering = ['-created']
+    lookup_field = 'slug'
 
 
 class SeriesViewSet(viewsets.ModelViewSet):
@@ -108,6 +113,7 @@ class SeriesViewSet(viewsets.ModelViewSet):
     filterset_fields = ['year', 'genre__name']
     ordering_fields = ['title', 'year', 'rating', 'created']
     ordering = ['-created']
+    lookup_field = 'slug'
 
 
 class AnimeViewSet(viewsets.ModelViewSet):
@@ -120,6 +126,7 @@ class AnimeViewSet(viewsets.ModelViewSet):
     filterset_fields = ['year', 'genre__name']
     ordering_fields = ['title', 'year', 'rating', 'created']
     ordering = ['-created']
+    lookup_field = 'slug'
 
 
 class CartoonViewSet(viewsets.ModelViewSet):
@@ -132,3 +139,4 @@ class CartoonViewSet(viewsets.ModelViewSet):
     filterset_fields = ['year', 'genre__name']
     ordering_fields = ['title', 'year', 'rating', 'created']
     ordering = ['-created']
+    lookup_field = 'slug'

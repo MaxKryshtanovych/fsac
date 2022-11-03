@@ -3,8 +3,7 @@ from rest_framework.response import Response
 
 
 class FsacPagination(PageNumberPagination):
-    page_size = 1
-    max_page_size = 1024
+    page_size = 20
 
     def get_paginated_response(self, data):
         return Response({

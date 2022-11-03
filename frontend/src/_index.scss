@@ -1,0 +1,67 @@
+$background-primary : #18181b;
+$background-secondary : #202124;
+$color: #663399;
+$text-color: #F5F5F5;
+$font-family: Consolas;
+$border: 2px solid #663399;
+$box-shadow: $color 2px 0px 2px,
+      $color 1.75517px 0.958851px 5px,
+      $color 1.0806px 1.68294px 5px,
+      $color 0.141474px 1.99499px 5px,
+      $color -0.832294px 1.81859px 5px,
+      $color -1.60229px 1.19694px 5px,
+      $color -1.97998px 0.28224px 5px,
+      $color -1.87291px -0.701566px 5px,
+      $color -1.30729px -1.5136px 5px,
+      $color -0.421592px -1.95506px 5px,
+      $color 0.567324px -1.91785px 5px,
+      $color 1.41734px -1.41108px 5px,
+      $color 1.92034px -0.558831px 5px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  font-size: 40px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.sska {
+  padding: 20px;
+  margin-left: 130px;
+  margin-right: 130px;
+  background-color: $background-primary;
+  min-height: 100vh;
+
+  @media screen and (max-width: 667px){
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+main {
+  background-color: $background-secondary;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color;
+  border-radius: 20px;
+}

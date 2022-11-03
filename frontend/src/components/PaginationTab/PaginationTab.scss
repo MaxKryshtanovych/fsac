@@ -1,0 +1,51 @@
+.pagination-container {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding-left: 40%;
+  padding-right: 40%;
+  margin-top: 20px;
+
+  button {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: Consolas;
+    display: inline-block;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #F5F5F5;
+    background-color: #202124;
+    border: 2px solid rebeccapurple;
+    border-radius: 10px;
+    box-shadow: 0 9px #202124;
+
+    &:hover {
+      background-color: rebeccapurple;
+    }
+
+    &:active {
+      background-color: rebeccapurple;
+      box-shadow: 0 5px #202124;
+      transform: translateY(4px);
+    }
+  }
+
+  .prev-button {
+    float: left;
+  }
+
+  .next-button {
+    float: right;
+  }
+
+  @media screen and (max-width: 667px) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+

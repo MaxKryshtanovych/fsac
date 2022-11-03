@@ -10,7 +10,7 @@ const SearchTab = ({searchFilter, setSearchFilter}) => {
     return (
         <div className='searchbar'>
             <input type="text"
-                   placeholder={"Search"}
+                   placeholder={"Search             🔎︎"}
                    onChange={(e) => handleChange(e.target.value)}
                    value={searchFilter}
             />
